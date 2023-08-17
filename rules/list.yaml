@@ -1,0 +1,20 @@
+rules:
+- id: zero_length_comparison
+  languages:
+  - elixir
+  message: >-
+    Using `length/1` or `Enum.count/1` to check size is `0` can be
+    very expensive.
+  pattern-either:
+  - pattern: |
+      if length($LIST) == 0 do
+        $BODY
+      end
+  - pattern: |
+      if Enum.count($LIST) == 0 do
+        $BODY
+      end
+  fix: |
+    if Enum.empty?($LIST) do
+      $BODY
+  severity: WARNING

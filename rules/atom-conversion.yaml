@@ -1,0 +1,35 @@
+rules:
+- id: unsafe_string_to_atom
+  languages:
+  - elixir
+  message: >-
+    Using `String.to_atom/1` is unsafe. It create dynamic atom which's not garbage
+    by GC. And it cause possible to Denial of Service by dynamic creating atom.
+  pattern-either:
+  - pattern: String.to_atom($S)
+  - pattern: $S |> String.to_atom()
+  severity: ERROR
+
+- id: unsafe_list_to_atom
+  languages:
+  - elixir
+  message: >-
+    Using `List.to_atom/1` is unsafe. It create dynamic atom which's not garbage
+    by GC. And it cause possible to Denial of Service by dynamic creating atom.
+  pattern-either:
+  - pattern: List.to_atom($S)
+  - pattern: $S |> List.to_atom()
+  severity: ERROR
+
+# FIXME: do not double raise when using pipe operator (`|>`).
+- id: unsafe_binary_to_atom
+  languages:
+  - elixir
+  message: >-
+    Using `:erlang.binary_to_atom/1` is unsafe. It create dynamic atom which's not garbage
+    by GC. And it cause possible to Denial of Service by dynamic creating atom.
+  pattern-either:
+  - pattern: :erlang.binary_to_atom($BIN)
+  - pattern: :erlang.binary_to_atom($BIN, $ENC)
+  - pattern: $BIN |> :erlang.binary_to_atom(...)
+  severity: ERROR
