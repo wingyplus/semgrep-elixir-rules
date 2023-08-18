@@ -1,0 +1,12 @@
+# ruleid: enum-map-enum-into-map
+%{a: 1}
+|> Enum.into(%{}, fn {k, v} -> {k, v * 2} end)
+
+# ruleid: enum-map-enum-into-map
+%{a: 1}
+|> Enum.into(%{}, fn {k, v} -> {k, v * 2} end)
+
+# ruleid: enum-map-enum-into-map
+%{a: 1}
+|> Enum.filter(fn {k, _v} -> k == :a end)
+|> Enum.into(%{}, fn {k, v} -> {k, v * 2} end)

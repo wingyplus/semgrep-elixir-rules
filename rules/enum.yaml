@@ -1,0 +1,26 @@
+rules:
+- id: enum-map-enum-into-map
+  languages:
+  - elixir
+  message: |
+    Instead of using:
+
+        data
+        |> Enum.map(fun)
+        |> Enum.into(%{})
+
+    Recommended to use `Enum.into/3` instead:
+
+        Enum.into(data, %{}, fun)
+  pattern-either:
+  - pattern: |
+      Enum.map($E, $FUN)
+      |> Enum.into(%{})
+  - pattern: |
+      $E
+      |> Enum.map($FUN)
+      |> Enum.into(%{})
+  fix: |
+    $E
+    |> Enum.into(%{}, $FUN end)
+  severity: WARNING
