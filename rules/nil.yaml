@@ -1,8 +1,16 @@
 rules:
-- id: nil-check
+- id: is-nil-check
   languages:
   - elixir
   message: Prefer `is_nil/1` over `var == nil` pattern.
   pattern: $VAR == nil
   fix: is_nil($VAR)
+  severity: WARNING
+
+- id: not-is-nil-check
+  languages:
+  - elixir
+  message: Prefer `not is_nil/1` over `var != nil` pattern.
+  pattern: $VAR != nil
+  fix: not is_nil($VAR)
   severity: WARNING
