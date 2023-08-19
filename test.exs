@@ -1,4 +1,5 @@
-Mix.install([:dagger])
+Mix.install([{:dagger, "0.8.2"}])
+# Mix.install([{:dagger, "~> 0.8.4"}])
 
 client = Dagger.connect!()
 
