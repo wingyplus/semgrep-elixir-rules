@@ -10,7 +10,7 @@ client
 |> Dagger.Container.from("returntocorp/semgrep")
 |> Dagger.Container.with_mounted_directory("/src", src)
 |> Dagger.Container.with_workdir("/src")
-|> Dagger.Container.with_exec(~w[semgrep --metrics=off --test rules])
+|> Dagger.Container.with_exec(~w[semgrep --metrics=off --test .])
 |> Dagger.Sync.sync()
 
 Dagger.close(client)
