@@ -1,0 +1,8 @@
+rules:
+- id: double-boolean-negation
+  languagese:
+  - elixir
+  pattern: '!!$VAR'
+  message: >-
+    Double negations can obsecure the original value.
+  severity: WARNING
