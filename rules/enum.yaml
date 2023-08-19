@@ -1,5 +1,5 @@
 rules:
-- id: enum-map-enum-into-map
+- id: map-into
   languages:
   - elixir
   message: |
