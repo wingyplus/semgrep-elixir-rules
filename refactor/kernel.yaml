@@ -1,0 +1,15 @@
+rules:
+- id: dbg-call
+  languages:
+  - elixir
+  message: >-
+    Calling `dbg/1` can be expose sensitive information.
+  pattern-either:
+  - pattern: |
+      dbg($TERM)
+  - pattern: |
+      $TERM
+      |> dbg()
+  fix: |
+    $TERM
+  severity: ERROR
