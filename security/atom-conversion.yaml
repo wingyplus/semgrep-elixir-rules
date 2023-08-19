@@ -6,9 +6,21 @@ rules:
   message: >-
     Using `String.to_atom/1` is unsafe. It create dynamic atom which's not garbage
     by GC. And it cause possible to Denial of Service by dynamic creating atom.
-  pattern-either:
-  - pattern: String.to_atom($S)
-  - pattern: $S |> String.to_atom()
+  pattern: String.to_atom($S)
+  fix: |
+    String.to_existing_atom($S)
+  severity: ERROR
+
+- id: unsafe_string_to_atom_pipe
+  languages:
+  - elixir
+  message: >-
+    Using `String.to_atom/1` is unsafe. It create dynamic atom which's not garbage
+    by GC. And it cause possible to Denial of Service by dynamic creating atom.
+  pattern: $S |> String.to_atom()
+  fix: |
+    $S
+    |> String.to_existing_atom()
   severity: ERROR
 
 - id: unsafe_list_to_atom
